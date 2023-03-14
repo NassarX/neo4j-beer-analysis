@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  neo4j:
+    image: neo4j:4.4.9
+    container_name: Neo4J
+    environment:
+      - NEO4J_AUTH=${NEO4J_AUTH}
+      - NEO4J_dbms_connector_https_advertised__address=${NEO4J_dbms_connector_https_advertised__address}
+      - NEO4J_dbms_connector_http_advertised__address=${NEO4J_dbms_connector_http_advertised__address}
+      - NEO4J_dbms_connector_bolt_advertised__address=${NEO4J_dbms_connector_bolt_advertised__address}
+      - NEO4J_dbms_security_procedures_unrestricted=${NEO4J_dbms_security_procedures_unrestricted}
+      - NEO4J_dbms_security_procedures_allowlist=${NEO4J_dbms_security_procedures_allowlist}
+    volumes:
+      - ./Neo4J-Beer-Analysis/Neo4JPlugins:/plugins
+      - ./Neo4J-Beer-Analysis/data:/data
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+
+networks:
+  default:
+    name: BDMM_notebooks
+
