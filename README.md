@@ -3,7 +3,7 @@
 
 ## Project Overview
 
-The Beer project is an analysis of beer and breweries using a graph database. The data used in this project has been extracted from Kaggle and released by Evan Hallmark. While the author does not present metadata on the origin of the data, it is likely a collection of open data from places like BeerAdvocate.
+The Beer project is an analysis of beer and breweries using a graph database. The data used in this project has been extracted from [kaggle](https://www.kaggle.com/ehallmar/beers-breweries-and-beer-reviews) and released by Evan Hallmark. While the author does not present metadata on the origin of the data, it is likely a collection of open data from places like [beeradvocate](https://www.beeradvocate.com/).
 
 ## Project Structure
 
@@ -47,6 +47,60 @@ Once the containers are up and running, you should be able to access the applica
 
 ![Explore Schema](schema.png "Schema")
 
+
+### Nodes
+
+- `Countries`
+    - name: Name of the country.
+- `Cities`
+    - `name`: Name of the city.
+- `Breweries`
+  - id: Unique identifier of the brewery.
+  - name: Name of the brewery.
+  - state: State where the brewery is located.
+  - notes: Notes about the brewery.
+  - types: Types of beer brewed by the brewery.
+- `Beers`
+  - id: Unique identifier of the beer.
+  - name: Name of the beer.
+  - abv: Alcohol by volume (ABV) of the beer.
+  - state: State where the beer is produced.
+  - notes: Notes about the beer.
+  - retired: Whether the beer has been retired.
+  - availability: Availability of the beer.
+  - brewery_id: ID of the brewery that produced the beer.
+- `Reviews`
+  - id: Unique identifier of the review.
+  - text: Text of the review.
+  - smell: Score of the smell of the beer in the review.
+  - look: Score of the look of the beer in the review.
+  - taste: Score of the taste of the beer in the review.
+  - feel: Score of the feel of the beer in the review.
+  - overall: Overall score of the beer in the review.
+  - score: Score of the beer in the review.
+  - date: Date of the review.
+  - beer_id: ID of the beer that is being reviewed.
+- `Style`
+  - name: Name of the beer style.
+- `User`
+  - name: Name of the user.
+
+### Relationships
+
+- `IN`
+    - BREWERIES: located IN COUNTRIES.
+    - BREWERIES: located IN COUNTRIES.
+    - CITIES: located IN COUNTRIES.
+- `BREWED`
+    - BEERS: BREWED by BREWERIES. 
+- `HAS_STYLE`
+  - BEERS: HAS STYLE.
+- `REVIEWED`
+  - BEERS: has REVIEWS.
+- `POSTED`
+  - REVIEWS: POSTED by USER.
+
+    
 ```docker
 (BREWERIES)-[:IN]->()<-[:IN]-()<-[:IN]-(BREWERIES)-[:BREWED]->(BEERS)-[:HAS_STYLE]->(),
 (BEERS)-[:REVIEWED]->()-[:POSTED]->()
