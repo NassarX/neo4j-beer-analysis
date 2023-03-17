@@ -11,8 +11,8 @@ services:
       - NEO4J_dbms_security_procedures_unrestricted=${NEO4J_dbms_security_procedures_unrestricted}
       - NEO4J_dbms_security_procedures_allowlist=${NEO4J_dbms_security_procedures_allowlist}
     volumes:
-      - ./Neo4J-Beer-Analysis/Neo4JPlugins:/plugins
-      - ./Neo4J-Beer-Analysis/data:/data
+      - ./Neo4JPlugins:/plugins
+      - ./data:/data
     ports:
       - "7474:7474"
       - "7687:7687"
